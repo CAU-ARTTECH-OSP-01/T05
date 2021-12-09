@@ -37,7 +37,7 @@ public class CardInfo : MonoBehaviour
     public GameObject componentContainer;
     public List<GameObject> components;
 
-    private void Start()
+    void Init()
     {
         for(int i = 0; i < componentContainer.transform.childCount; i++)
         {
@@ -47,6 +47,7 @@ public class CardInfo : MonoBehaviour
 
     public void SetCardInfo(Dictionary<string, string> _data)
     {
+        Init();
         stats.components.Clear();
         
         stats.index = int.Parse(_data["Index"]);
@@ -84,7 +85,7 @@ public class CardInfo : MonoBehaviour
         txtName.text = stats.name;
         txtCount.text = stats.count.ToString();
 
-        for(int i = 0; i < components.Count; i++)
+        for(int i = 0; i < stats.components.Count; i++)
         {
             // 아이콘 변경 : components[i].transform.GetChild(0)
             components[i].transform.GetChild(1).GetComponent<Text>().text = stats.components[i].value.ToString();

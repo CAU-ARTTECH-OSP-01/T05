@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-    public CardInfo card;
     void Start()
     {
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
@@ -15,8 +14,6 @@ public class TestScript : MonoBehaviour
         //Debug.Log(data[0]["Rare"]);
         //Debug.Log(data[0]["Component_0"]);
         //Debug.Log(data[0]["Value_0"]);
-
-        card.SetCardInfo(data[1]);
     }
 
 }
