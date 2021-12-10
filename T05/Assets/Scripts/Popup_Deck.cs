@@ -9,8 +9,20 @@ public class Popup_Deck : MonoBehaviour
     public List<CardStats> cardList;
     public List<GameObject> cards;
 
+    void Init()
+    {
+        cardList.Clear();
+        for(int i = 0; i < cards.Count; i++)
+        {
+            Destroy(cards[i]);
+        }
+        cards.Clear();
+    }
+
     public void OpenDeck()
     {
+        Init();
+
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
         data = DataReader_TSV.ReadDataByTSV("Data/CardList");
 
@@ -20,6 +32,9 @@ public class Popup_Deck : MonoBehaviour
         {
             GameObject _obj = Instantiate(originCard, content.transform);
             _obj.GetComponent<CardInfo>().SetCardInfo(data[_list[i]]);
+
+            cardList.Add(_obj.GetComponent<CardInfo>().stats);
+            cards.Add(_obj);
         }
     }
 }
