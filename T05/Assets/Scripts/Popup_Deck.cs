@@ -31,17 +31,17 @@ public class Popup_Deck : MonoBehaviour
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
         data = DataReader_TSV.ReadDataByTSV("Data/CardList"); //DataReader_TSV 스크립트를 통해 나눠진 데이터를 가져온다.
 
-        List<int> _list = DeckManager.Instance.deckList; //Singleton으로 만들었던 DeckManager에 쉽게 접근할 수 있다.
-                                                         //_list를 하나 만들고 deckList를 넣어 리스트를 얻어온다.
+        List<CardStats> _list = DeckManager.Instance.deckCardStats; //Singleton으로 만들었던 DeckManager에 쉽게 접근할 수 있다.
+                                                                    //_list를 하나 만들고 deckCardStats를 넣어 덱 카드의 Stats 리스트를 얻어온다.
 
         for (int i = 0; i < _list.Count; i++) //덱 안의 카드를 생성해주기 위해 덱의 갯수만큼 반복해준다.
         {
             GameObject _obj = Instantiate(originCard, content.transform); //_obj로 GameObject를 선언하고, 카드를 생성해준다.
                                                                           //유니티에서 제공하는 Instantiate는 게임 오브젝트를 하나 생성해주는 함수이다.
                                                                           //originCard로 생성할 오브젝트와 생성할 부모의 위치(content.transform)를 넣어준다.
-            _obj.GetComponent<CardInfo>().SetCardInfo(data[_list[i]]); //오브젝트에 존재하는 CardInfo 컴포넌트에 접근 후,
-                                                                       //SetCardInfo(data[카드 번호])를 통해 넣어준다.
-                                                                       //카드 번호는 DeckManager의 덱에서 가져온 리스트의 i번째를 넣어준다.
+            _obj.GetComponent<CardInfo>().SetCardInfo(_list[i]); //카드 오브젝트에 존재하는 CardInfo 컴포넌트에 접근 후,
+                                                                 //SetCardInfo(리스트[번호])를 통해 넣어준다.
+                                                                 //i번째 존재하는 카드 오브젝트의 Stats를 SetCardInfo를 통해 모두 넣어준다.
             cardList.Add(_obj.GetComponent<CardInfo>().stats); //카드 stats를 가져온다.
             cards.Add(_obj); //Hierarchy 창의 어디에 위치하는지 알아보기 위해 cards 리스트에 _obj를 넣어준다.
         }

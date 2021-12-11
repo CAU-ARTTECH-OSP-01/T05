@@ -95,6 +95,16 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
         SetCardComponents(); //카드의 정보가 다 들어오고 난 후, 값을 게임 화면에 보여주도록 한다.
     }
 
+    public void SetCardInfo(CardStats _stats) //위의 함수와 이름은 같으나, 인자를 CardStats _stats로 받는다.
+    {
+        Init();
+        stats.components.Clear();
+
+        stats = _stats; //받은 인자를 stats 변수에 넣어준다.
+
+        SetCardComponents(); //카드의 정보를 게임 화면에 보여준다.
+    }
+
     void SetCardComponents() //카드 오브젝트에 만들었던 값들을 넣어 보여주도록 하는 함수
     {
         txtName.text = stats.name; //Text의 text 컴포넌트에 접근해서 값을 넣어준다.
@@ -114,9 +124,21 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
     public void CardUse() //카드가 사용되었을 때 count값 변화
     {
         stats.count--;
+
+        SetCardComponents(); //count값이 변화한 내용을 카드에 적용
+
         if (stats.count <= 0)
         {
-            print("카드 묘지로 이동");
+            print("카드 묘지로 이동"); //덱으로 이동하는 코드 참고해서 구현
         }
+        else
+        {
+            print("덱으로 이동");
+            DeckManager.Instance.deckCardStats.Add(stats);
+        }
+        DeckManager.Instance.SetDeckCount(); //카드가 사용되었을 때 덱 버튼 텍스트 변경
+        HandManager.Instance.SetCardPositions(); //카드가 사용되었을 때 위치 초기화
+
+        Destroy(gameObject); //사용된 카드들은 게임 화면에서 제거한다. (덱으로 돌아가거나 묘지로 이동)
     }
 }

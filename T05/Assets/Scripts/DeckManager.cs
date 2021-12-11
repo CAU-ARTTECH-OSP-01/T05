@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
 {
@@ -25,20 +26,44 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
     private void Start()
     {
         SetDeckCardInfo(); //게임이 시작될 때 덱의 데이터로 가져오도록 한다.
+        SetDeckCount(); //가장 처음 들고 있는 카드 수를 덱 버튼에 텍스트로 보여준다.
     }
 
-    public void GetHandCards() //덱의 카드를 핸드로 가져오는 함수, 턴 종료 버튼의 On Click 이벤트에 DeckManager를 가진 덱 버튼을 넣어주고, 설정한다.
+    public IEnumerator GetHandCards() //덱의 카드를 핸드로 가져오는 함수, 턴 종료 버튼의 On Click 이벤트에 DeckManager를 가진 덱 버튼을 넣어주고, 설정한다.
     {
-        for (int i = 0; i < drawCount; i++)
+        yield return new WaitForSeconds(0.1f);
+
+        int _count = drawCount;
+        if (drawCount > deckCardStats.Count) //덱에 있는 카드 수보다 드로우 카드 수가 더 많으면 남은 카드 수만큼만 드로우할 수 있도록 제한한다.
+            _count = deckCardStats.Count;
+
+        for (int i = 0; i < _count; i++)
         {
             int _rnd = Random.Range(0, deckCardStats.Count); //0부터 덱 리스트에 있는 갯수 중 랜덤한 수를 뽑는다.
 
             GameObject _obj = Instantiate(originCard, HandManager.Instance.transform); //HandManager를 가지고 있는 핸드 위치에 카드 오브젝트 생성
 
+            _obj.GetComponent<CardInfo>().SetCardInfo(deckCardStats[_rnd]); //카드 오브젝트에 랜덤으로 뽑은 카드의 정보를 담아 게임 화면에 보여준다.
+            _obj.GetComponent<CardController>().isDeck = false; //핸드로 생성 시 CardController에 있는 isDeck을 false로 설정해준다.
 
 
             deckCardStats.RemoveAt(_rnd); //카드를 핸드로 생성함과 동시에 덱에서는 삭제해준다.
         }
+
+        HandManager.Instance.SetCardPositions(); //카드를 핸드에 생성하면서 위치를 조정해준다.
+        SetDeckCount(); //덱 버튼 텍스트 변경
+    }
+
+    public void BackCards2Deck() //턴 종료 버튼을 눌렀을 때 덱으로 카드를 되돌린다.
+    {
+        for (int i = 0; i <  HandManager.Instance.transform.childCount; i++) //핸드에 카드가 있는 만큼 반복하게 된다.
+        {
+            deckCardStats.Add(HandManager.Instance.transform.GetChild(i).GetComponent<CardInfo>().stats); //핸드의 각 카드들에 있는 정보들을 덱에 다시 담는다.
+            Destroy(HandManager.Instance.transform.GetChild(i).gameObject); //사용하지 않은 핸드의 카드들을 삭제한다.
+        }
+
+        StartCoroutine(GetHandCards());
+        SetDeckCount(); //덱 버튼 텍스트 변경
     }
 
     public List<CardStats> deckCardStats; //위에서 int 리스트로 선언했던 deckList를 아래의 SetCardInfo와 SetDeckCardInfo를 통해 실제 데이터로 변환해준다.
@@ -95,5 +120,11 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
         {
             deckCardStats.Add(SetCardInfo(data[_list[i]])); //위의 SetCardInfo를 통해 정보를 받아온 후, deckCardStats 리스트에 넣어준다.
         }
+    }
+
+    public Text txt_DeckCount; //덱 버튼의 숫자 텍스트를 적어주기 위한 변수 선언
+    public void SetDeckCount()
+    {
+        txt_DeckCount.text = deckCardStats.Count.ToString(); //덱에 있는 카드 리스트의 길이를 string 값으로 덱 버튼의 텍스트에 넣어준다.
     }
 }

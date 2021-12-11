@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardInfos: []
   cardObjects: []
+  gap: 250
 --- !u!1 &862738544 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8025192465304087816, guid: f2fea1b9a54b52c49b5986c06289962c, type: 3}
@@ -989,6 +990,7 @@ MonoBehaviour:
   originCard: {fileID: 4262033145761757555, guid: 494921e7ca8b2d84baf913fd925de95d, type: 3}
   drawCount: 4
   deckCardStats: []
+  txt_DeckCount: {fileID: 1599368798}
 --- !u!1 &1795913551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +1077,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1652532528}
         m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
         m_MethodName: GetHandCards
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+      - m_Target: {fileID: 1652532528}
+        m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
+        m_MethodName: BackCards2Deck
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

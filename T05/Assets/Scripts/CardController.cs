@@ -13,35 +13,43 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
     public float usePos_y = 400f; //Ä«µå°¡ »ç¿ëµÇ°Ô ÀÎ½ÄÇÒ ³ôÀÌ
 
     public bool isClicked;
+    public bool isDeck = true; //ÇÚµå·Î °¡°Ô µÇ´Â »óÈ²¿¡¼­ false·Î ¹Ù²ãÁØ´Ù.
 
     public Camera cam;
 
-    private void Start()
+    public void SetCardDefaultPos() //HandManagerÀÇ SetCardPositions¿¡ ³Ö¾î Ã³À½ Ä«µåÀÇ À§Ä¡¸¦ ÁöÁ¤ÇØÁÖµµ·Ï ÇÑ´Ù.
     {
-        defaultPos_x = transform.GetComponent<RectTransform>().anchoredPosition.x; //±âº» x°ª¿¡ °¡Àå Ã³À½ À§Ä¡ÇÑ °ªÀ» ³Ö¾îÁØ´Ù. (µå·¡±× ½Ã À§Ä¡ º¯°æ »óÈ² ´ëºñ)
-    }
-
-    public void PointerEnter() //Ä«µå ¿ÀºêÁ§Æ®¿¡ Event Trigger ÄÄÆ÷³ÍÆ® ºÎÂø ÈÄ, Pointer Enter¸¦ Ãß°¡ÇÏ¿© »ç¿ëÇÑ´Ù.
-    {
-        transform.localScale = Vector3.one * expandRatio; //Ä«µå È®´ë, new Vector3(expandRatio, expandRatio, expandRatio)¿Í °°´Ù.
-
-        transform.GetComponent<RectTransform>().anchoredPosition //RectTransformÀÇ anchoredPositionÀ» ÀÌ¿ëÇÏ¸é InspectorÃ¢¿¡¼­ º¸ÀÌ´Â ÁÂÇ¥¸¦ ±×´ë·Î »ç¿ëÇÒ ¼ö ÀÖ´Ù.
-            = new Vector3(defaultPos_x, expandOffset_y, 0); //Ä«µå À§Ä¡ º¯È­
-
-        transform.SetSiblingIndex(transform.parent.childCount - 1); //SetSiblingIndex = ºÎ¸ð ¾ÈÀÇ ¼ø¼­
-                                                                    //Ä«µåÀÇ ¼ø¼­¸¦ ¸Ç ¾Æ·¡·Î º¯°æÇÏ¿© UI»ó °¡Àå À§¿¡ º¸ÀÌµµ·Ï ÇÑ´Ù.
-    }
-    public void PointerExit() //¿ø·¡ »óÅÂ·Î µÇµ¹¸°´Ù.
-    {
-        transform.localScale = Vector3.one;
-
         transform.GetComponent<RectTransform>().anchoredPosition
             = new Vector3(defaultPos_x, defaultOffset_y, 0);
     }
 
+    public void PointerEnter() //Ä«µå ¿ÀºêÁ§Æ®¿¡ Event Trigger ÄÄÆ÷³ÍÆ® ºÎÂø ÈÄ, Pointer Enter¸¦ Ãß°¡ÇÏ¿© »ç¿ëÇÑ´Ù.
+    {
+        if (!isDeck)
+        {
+            transform.localScale = Vector3.one * expandRatio; //Ä«µå È®´ë, new Vector3(expandRatio, expandRatio, expandRatio)¿Í °°´Ù.
+
+            transform.GetComponent<RectTransform>().anchoredPosition //RectTransformÀÇ anchoredPositionÀ» ÀÌ¿ëÇÏ¸é InspectorÃ¢¿¡¼­ º¸ÀÌ´Â ÁÂÇ¥¸¦ ±×´ë·Î »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+                = new Vector3(defaultPos_x, expandOffset_y, 0); //Ä«µå À§Ä¡ º¯È­
+
+            transform.SetSiblingIndex(transform.parent.childCount - 1); //SetSiblingIndex = ºÎ¸ð ¾ÈÀÇ ¼ø¼­
+                                                                        //Ä«µåÀÇ ¼ø¼­¸¦ ¸Ç ¾Æ·¡·Î º¯°æÇÏ¿© UI»ó °¡Àå À§¿¡ º¸ÀÌµµ·Ï ÇÑ´Ù.
+        }
+    }
+    public void PointerExit() //¿ø·¡ »óÅÂ·Î µÇµ¹¸°´Ù.
+    {
+        if (!isDeck)
+        {
+            transform.localScale = Vector3.one;
+
+            transform.GetComponent<RectTransform>().anchoredPosition
+                = new Vector3(defaultPos_x, defaultOffset_y, 0);
+        }
+    }
+
     public void CardClick()
     {
-        if (!isClicked)
+        if (!isClicked && !isDeck)
         {
             isClicked = true;
             cam = GameObject.Find("Main Camera").GetComponent<Camera>(); //Main Camera ¿ÀºêÁ§Æ®¿Í ±× ¾ÈÀÇ Camera ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿Â´Ù.
@@ -50,7 +58,7 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
 
     public void CardDrag()
     {
-        if (isClicked)
+        if (isClicked && !isDeck)
         {
             Vector2 _mousePosition = Input.mousePosition; //¸¶¿ì½º À§Ä¡¸¦ _mousePositionÀ¸·Î ¹Þ¾Æ¿Â´Ù.
             Vector2 _targetPosition = cam.ScreenToWorldPoint(_mousePosition); // ¸¶¿ì½º À§Ä¡¸¦ ¿ùµå ÁÂÇ¥·Î ÁöÁ¤ÇÑ´Ù.
@@ -60,7 +68,7 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
     }
     public void CardDrop()
     {
-        if (isClicked)
+        if (isClicked && !isDeck)
         {
             if (transform.GetComponent<RectTransform>().anchoredPosition.y >= usePos_y) //»ç¿ë ³ôÀÌº¸´Ù ³ô°Å³ª °°À» ¶§ Ä«µå°¡ »ç¿ëµÇµµ·Ï ¼³Á¤
             {

@@ -697,6 +697,7 @@ MonoBehaviour:
   defaultOffset_y: -100
   usePos_y: 400
   isClicked: 0
+  isDeck: 1
   cam: {fileID: 0}
 --- !u!114 &1710795924459416780
 MonoBehaviour:
