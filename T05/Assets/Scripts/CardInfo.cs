@@ -110,4 +110,13 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
             //stats의 components (이름 비슷하니 주의) 리스트의 i번째 개체의 value 값을 String으로 변환해서 넣어준다.
         }
     }
+
+    public void CardUse() //카드가 사용되었을 때 count값 변화
+    {
+        stats.count--;
+        if (stats.count <= 0)
+        {
+            print("카드 묘지로 이동");
+        }
+    }
 }

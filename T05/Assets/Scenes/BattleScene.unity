@@ -336,6 +336,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &627873783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 627873784}
+  - component: {fileID: 627873785}
+  m_Layer: 5
+  m_Name: "\uD578\uB4DC"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &627873784
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627873783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1526935175}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1100, y: 400}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &627873785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627873783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c83831883283743a51bfd76cfb9bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardInfos: []
+  cardObjects: []
 --- !u!1 &862738544 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8025192465304087816, guid: f2fea1b9a54b52c49b5986c06289962c, type: 3}
@@ -689,6 +739,7 @@ RectTransform:
   - {fileID: 1441454131}
   - {fileID: 1795913552}
   - {fileID: 154774220}
+  - {fileID: 627873784}
   m_Father: {fileID: 1841226370}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -934,7 +985,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e2ce6f0f5683e419df361a9bdf1993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckList: 0000000001000000000000000200000003000000
+  deckList: 00000000010000000000000002000000030000000400000006000000060000000700000008000000
+  originCard: {fileID: 4262033145761757555, guid: 494921e7ca8b2d84baf913fd925de95d, type: 3}
+  drawCount: 4
+  deckCardStats: []
 --- !u!1 &1795913551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1071,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1795913554}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1652532528}
+        m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
+        m_MethodName: GetHandCards
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1795913554
 MonoBehaviour:
   m_ObjectHideFlags: 0
