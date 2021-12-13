@@ -8,9 +8,9 @@ public class CardController : MonoBehaviour //카드를 선택하고, 드래그하는 등 카�
 
     public float defaultPos_x = 0f; //기본 x값
     public float expandRatio = 1.3f; //확대되었을 때 비율
-    public float expandOffset_y = 70f; //확대되었을 때 y 이동 값
-    public float defaultOffset_y = -100f; //기본 y값 (카드의 위치를 살짝 아래로 내리고 싶을 때)
-    public float usePos_y = 400f; //카드가 사용되게 인식할 높이
+    public float expandOffset_y = 25f; //확대되었을 때 y 이동 값
+    public float defaultOffset_y = -30f; //기본 y값 (카드의 위치를 살짝 아래로 내리고 싶을 때)
+    public float usePos_y = 80f; //카드가 사용되게 인식할 높이
 
     public bool isClicked;
     public bool isDeck = true; //핸드로 가게 되는 상황에서 false로 바꿔준다.

@@ -130,6 +130,7 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
         if (stats.count <= 0)
         {
             print("카드 묘지로 이동"); //덱으로 이동하는 코드 참고해서 구현
+            DeckManager.Instance.graveCardStats.Add(stats); //사용 횟수가 0이 되면 graveCardStats 리스트로 카드 이동
         }
         else
         {
