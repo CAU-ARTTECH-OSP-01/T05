@@ -69,6 +69,8 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
     public List<CardStats> deckCardStats; //위에서 int 리스트로 선언했던 deckList를 아래의 SetCardInfo와 SetDeckCardInfo를 통해 실제 데이터로 변환해준다.
                                           //Start에서 deckList를 이용하여 deckCardStats 리스트를 만들어 준 후부터는 이 리스트로 덱을 관리하도록 한다.
 
+    public List<CardStats> graveCardStats; //count가 0이 된 카드들의 정보를 담을 리스트
+
     public CardStats SetCardInfo(Dictionary<string, string> _data) //CardInfo의 SetCardInfo 주석 참고
                                                                    //CardStats 값을 반환해준다.
     {
@@ -123,8 +125,10 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
     }
 
     public Text txt_DeckCount; //덱 버튼의 숫자 텍스트를 적어주기 위한 변수 선언
+    public Text txt_GraveCount; //묘지 버튼의 숫자 텍스트를 적어주기 위한 변수 선언
     public void SetDeckCount()
     {
         txt_DeckCount.text = deckCardStats.Count.ToString(); //덱에 있는 카드 리스트의 길이를 string 값으로 덱 버튼의 텍스트에 넣어준다.
+        txt_GraveCount.text = graveCardStats.Count.ToString();
     }
 }
