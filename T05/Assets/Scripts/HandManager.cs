@@ -48,4 +48,20 @@ public class HandManager : MonoBehaviour //핸드 오브젝트에 컴포넌트로 넣어서 사�
             transform.GetChild(i).GetComponent<CardController>().SetCardDefaultPos();
         }
     }
+
+    public IEnumerator SetCardPositions_WaitDeleteCard() //카드가 사용된 후 삭제될 때까지 기다린 후 자리 배치를 하도록 한다.
+    {
+        yield return new WaitForSeconds(0.1f); //0.1초 정도 기다려 준다.
+
+        for (int i = 0; i < transform.childCount; i++) //위의 SetCardPosition 주석 참고
+        {
+            transform.GetChild(i).GetComponent<CardController>().defaultPos_x = -32 * (transform.childCount - 1) + gap * i; //카드의 위치 조정
+
+            transform.GetChild(i).GetComponent<CardController>().SetCardDefaultPos();
+        }
+    }
+    public void WaitDeleteCard() //CardInfo의 CardUse 스크립트에서 gameObject(CardInfo를 가진 오브젝트)가 삭제 되기 전 실행하기 위해 사용.
+    {
+        StartCoroutine(SetCardPositions_WaitDeleteCard());
+    }
 }

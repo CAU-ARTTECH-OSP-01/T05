@@ -138,7 +138,7 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
             DeckManager.Instance.deckCardStats.Add(stats);
         }
         DeckManager.Instance.SetDeckCount(); //카드가 사용되었을 때 덱 버튼 텍스트 변경
-        HandManager.Instance.SetCardPositions(); //카드가 사용되었을 때 위치 초기화
+        HandManager.Instance.WaitDeleteCard(); //카드가 사용되었을 때 위치 초기화
 
         Destroy(gameObject); //사용된 카드들은 게임 화면에서 제거한다. (덱으로 돌아가거나 묘지로 이동)
     }
