@@ -23,7 +23,13 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
     public GameObject originCard; //카드 오브젝트 생성을 위해 선언
     public int drawCount; //드로우할 카드 수 선언
 
-    private void Start()
+    /*private void Start()
+    {
+        SetDeckCardInfo(); //게임이 시작될 때 덱의 데이터로 가져오도록 한다.
+        SetDeckCount(); //가장 처음 들고 있는 카드 수를 덱 버튼에 텍스트로 보여준다.
+    }*/
+
+    public void Init()
     {
         SetDeckCardInfo(); //게임이 시작될 때 덱의 데이터로 가져오도록 한다.
         SetDeckCount(); //가장 처음 들고 있는 카드 수를 덱 버튼에 텍스트로 보여준다.

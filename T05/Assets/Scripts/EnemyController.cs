@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
         enemyStatus_Current = _status; //시작하면서 현재 적의 Status와 기본 값을 동일하게 맞춰준다.
 
         SetEnemyUI();
+        SelectPattern();
     }
 
     private void Update()
@@ -78,18 +79,23 @@ public class EnemyController : MonoBehaviour
         //공격
         //방어
 
-        turn++; //턴 수를 늘려주고 공격과 방어를 0으로 바꿔준다.
-        currentPattern.Attack = 0;
-        currentPattern.Defence = 0;
+        //patterns 리스트 내의 패턴이 모두 종료되었을 때 처음부터 돌릴 지 3 ~ 5번 등 일부만 계속 반복할 지 결정
+        if (turn + 1 < patterns.Count) 
+            turn++; //턴 수를 늘려주고 공격과 방어를 0으로 바꿔준다.
+        else
+            turn = 0; //턴 수가 리스트 수를 넘어가게 되었을 때 특정 순서를 돌 수 있도록 해준다.
 
-        SetPatternUI(); //턴 수에 맞는 값을 UI상에 보여준다.
+        //currentPattern.Attack = 0;
+        //currentPattern.Defence = 0;
+
+        SelectPattern(); //턴 수에 맞는 패턴을 골라준다.
     }
 
     public void SelectPattern()
     {
         currentPattern = patterns[turn]; //턴 수에 맞는 patterns 리스트 안에서의 정보를 currentPattern에 넣어준다.
 
-        SetPatternUI(); //현재 패턴에 맞는 UI를 보여준다.
+        SetPatternUI(); //현재 패턴을 화면에 보여준다.
     }
 
     void SetPatternUI() //패턴 UI를 보여줄지 결정한다.
