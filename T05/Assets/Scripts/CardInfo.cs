@@ -8,7 +8,7 @@ using UnityEngine.UI; //UI 관련 사용을 하기 위해 using 선언
 public enum CardComponent //속성에는 여러 가지 종류가 있고, 그 종류가 한정되어 있음. 그걸 하나의 변수로 사용하기 위해 enum 이용.
                           //Inspector 창에서 드롭다운 메뉴로 쉽게 접근 가능.
 {
-    ATK, SHD, HEL, SEL //필요할 때마다 추가해서 사용
+    ATK, SHD, HEL, SEL, DOT, UP_ATK, DOWN_ATK, UP_SHD, DOWN_SHD //필요할 때마다 추가해서 사용
 }
 
 [Serializable]
@@ -33,6 +33,8 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
 {
     public CardStats stats; //위의 CardStats 클래스 선언, Serializable로 Inspector 창에서 변수 변경 가능
                             //CardStats의 변수에 접근할 때는 stats.index 등으로 접근 가능
+
+    public List<Sprite> icons; //카드 속성에 사용될 아이콘 이미지 리스트
 
     //SetCardComponents 함수에 사용될 변수들
     public Text txtName; //UnityEngine.UI 참조를 통해 Text 사용 가능
@@ -82,6 +84,16 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
                 _component = CardComponent.HEL;
             else if (_data["Component_" + i] == "SEL")
                 _component = CardComponent.SEL;
+            else if (_data["Component_" + i] == "DOT")
+                _component = CardComponent.DOT;
+            else if (_data["Component_" + i] == "UP_ATK")
+                _component = CardComponent.UP_ATK;
+            else if (_data["Component_" + i] == "DOWN_ATK")
+                _component = CardComponent.DOWN_ATK;
+            else if (_data["Component_" + i] == "UP_SHD")
+                _component = CardComponent.UP_SHD;
+            else if (_data["Component_" + i] == "DOWN_SHD")
+                _component = CardComponent.DOWN_SHD;
 
             ComponentStats _stats = new ComponentStats() //리스트를 감싸줄 ComponentStats를 지역 변수로 선언
             {
@@ -113,7 +125,27 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
 
         for(int i = 0; i < stats.components.Count; i++) //components 리스트의 갯수만큼 반복해준다.
         {
-            // 아이콘 변경 : components[i].transform.GetChild(0)
+            Sprite _sprite = icons[0];
+            if (stats.components[i].component == CardComponent.ATK) //components 리스트의 컴포넌트에 맞는 이미지를 넣어준다.
+                _sprite = icons[0];
+            else if (stats.components[i].component == CardComponent.SHD)
+                _sprite = icons[1];
+            else if (stats.components[i].component == CardComponent.HEL)
+                _sprite = icons[2];
+            else if (stats.components[i].component == CardComponent.SEL)
+                _sprite = icons[3];
+            else if (stats.components[i].component == CardComponent.DOT)
+                _sprite = icons[4];
+            else if (stats.components[i].component == CardComponent.UP_ATK)
+                _sprite = icons[5];
+            else if (stats.components[i].component == CardComponent.DOWN_ATK)
+                _sprite = icons[6];
+            else if (stats.components[i].component == CardComponent.UP_SHD)
+                _sprite = icons[7];
+            else if (stats.components[i].component == CardComponent.DOWN_SHD)
+                _sprite = icons[8];
+
+            components[i].transform.GetChild(0).GetComponent<Image>().sprite = _sprite; //넣어 준 이미지를 게임 화면에 보여준다.
             components[i].transform.GetChild(1).GetComponent<Text>().text = stats.components[i].value.ToString();
             //components 리스트의 i번째인 속성(i)에 들어있는 자식 오브젝트 중 2번째, 즉 txt 속성 값에 접근한다.
             //txt 속성 값에 접근한 후, Text 컴포넌트 안의 text에 값을 넣어 게임 화면에 보여줄 수 있도록 해준다.
@@ -124,6 +156,41 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
     public void CardUse() //카드가 사용되었을 때 count값 변화
     {
         stats.count--;
+
+        //카드 사용
+        int _rnd = UnityEngine.Random.Range(0, stats.components.Count); //컴포넌트 중 하나 랜덤으로 선택
+        print("랜덤하게 뽑은 값 : " + _rnd + "\n랜덤하게 뽑은 컴포넌트 : " + stats.components[_rnd].component);
+
+        switch (stats.components[_rnd].component) //고른 컴포넌트에 따라 행동하게 해준다.
+        {
+            case CardComponent.ATK:
+                GameManager.Instance.Attack(stats.components[_rnd].value);
+                break;
+            case CardComponent.SHD:
+                GameManager.Instance.Shield(stats.components[_rnd].value);
+                break;
+            case CardComponent.HEL:
+                GameManager.Instance.Heal(stats.components[_rnd].value);
+                break;
+            case CardComponent.SEL:
+                GameManager.Instance.Self(stats.components[_rnd].value);
+                break;
+            case CardComponent.DOT:
+                GameManager.Instance.Dot(stats.rare, stats.components[_rnd].value);
+                break;
+            case CardComponent.UP_ATK:
+                GameManager.Instance.Up_Attack(stats.rare, stats.components[_rnd].value);
+                break;
+            case CardComponent.DOWN_ATK:
+                GameManager.Instance.Down_Attack(stats.rare, stats.components[_rnd].value);
+                break;
+            case CardComponent.UP_SHD:
+                GameManager.Instance.Up_Shield(stats.rare, stats.components[_rnd].value);
+                break;
+            case CardComponent.DOWN_SHD:
+                GameManager.Instance.Down_Shield(stats.rare, stats.components[_rnd].value);
+                break;
+        }
 
         SetCardComponents(); //count값이 변화한 내용을 카드에 적용
 

@@ -77,24 +77,31 @@ public class EnemyController : MonoBehaviour
     public void EnemyTurn() //턴 종료 후 적이 공격이나 방어 등을 할 수 있도록 한다.
     {
         //공격
+        GameManager.Instance.Attack_Enemy(currentPattern.Attack);
         //방어
+        GetShield(currentPattern.Defence);
 
-        //patterns 리스트 내의 패턴이 모두 종료되었을 때 처음부터 돌릴 지 3 ~ 5번 등 일부만 계속 반복할 지 결정
-        if (turn + 1 < patterns.Count) 
-            turn++; //턴 수를 늘려주고 공격과 방어를 0으로 바꿔준다.
-        else
-            turn = 0; //턴 수가 리스트 수를 넘어가게 되었을 때 특정 순서를 돌 수 있도록 해준다.
-
-        //currentPattern.Attack = 0;
-        //currentPattern.Defence = 0;
+        currentPattern.Attack = 0;
+        currentPattern.Defence = 0;
 
         SelectPattern(); //턴 수에 맞는 패턴을 골라준다.
     }
 
     public void SelectPattern()
     {
-        currentPattern = patterns[turn]; //턴 수에 맞는 patterns 리스트 안에서의 정보를 currentPattern에 넣어준다.
+        int _turn = GameManager.Instance.turn;
 
+        //patterns 리스트 내의 패턴이 모두 종료되었을 때 처음부터 돌릴 지 3 ~ 5번 등 일부만 계속 반복할 지 결정
+        if (_turn + 1 > patterns.Count)
+            _turn = 0;
+
+        Pattern _pattern = new Pattern()
+        {
+            Attack = patterns[_turn].Attack,
+            Defence = patterns[_turn].Defence
+        };
+        currentPattern = _pattern; //턴 수에 맞는 patterns 리스트 안에서의 정보를 currentPattern에 넣어준다.
+        
         SetPatternUI(); //현재 패턴을 화면에 보여준다.
     }
 
@@ -128,5 +135,9 @@ public class EnemyController : MonoBehaviour
         }
         else
             enemyStatus_Current.Shield -= _dmg; //쉴드량이 충분하다면 쉴드에 데미지 계산
+    }
+    public void GetShield(int _shield) //쉴드를 추가해준다.
+    {
+        enemyStatus_Current.Shield += _shield;
     }
 }
