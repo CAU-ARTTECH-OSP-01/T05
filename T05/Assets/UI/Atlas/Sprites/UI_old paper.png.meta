@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 6402706560490033030
     second: UI_old paper 0
+  - first:
+      213: -7111648480660285478
+    second: UI_old paper_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -82,22 +85,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_old paper 0
+      name: UI_old paper_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 160
-        height: 250
-      alignment: 7
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        x: 14
+        y: 26
+        width: 122
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 21, y: 19, z: 13, w: 20}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 68f421b91bbfad850800000000000000
-      internalID: 6402706560490033030
+      spriteID: ad71ccec2695e4d90800000000000000
+      internalID: -7111648480660285478
       vertices: []
       indices: 
       edges: []

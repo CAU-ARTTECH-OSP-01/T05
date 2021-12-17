@@ -93,7 +93,7 @@ public class EnemyController : MonoBehaviour
 
         //patterns 리스트 내의 패턴이 모두 종료되었을 때 처음부터 돌릴 지 3 ~ 5번 등 일부만 계속 반복할 지 결정
         if (_turn + 1 > patterns.Count)
-            _turn = 0;
+            _turn = _turn % patterns.Count;
 
         Pattern _pattern = new Pattern()
         {
@@ -130,12 +130,18 @@ public class EnemyController : MonoBehaviour
             if (enemyStatus_Current.HP <= 0) //HP가 0보다 작다면 죽음 처리
             {
                 enemyStatus_Current.HP = 0;
-                print("적 죽음");
+                GameManager.Instance.EnemyDeath();
             }
         }
         else
             enemyStatus_Current.Shield -= _dmg; //쉴드량이 충분하다면 쉴드에 데미지 계산
     }
+
+    public void ShieldBreak() //턴이 끝날 때 쉴드를 없애준다.
+    {
+        enemyStatus_Current.Shield = 0;
+    }
+
     public void GetShield(int _shield) //쉴드를 추가해준다.
     {
         enemyStatus_Current.Shield += _shield;

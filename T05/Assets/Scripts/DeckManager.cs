@@ -18,6 +18,8 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
         instance = this;
     }
 
+    public bool isInit; //초기화 되었는지 여부 확인
+
     public List<int> deckList; //가지고 있는 카드의 종류와 갯수를 리스트에 넣어준다, Start할 때만 사용하고 이후부터는 데이터가 포함된 deckCardStats로 관리한다.
 
     public GameObject originCard; //카드 오브젝트 생성을 위해 선언
@@ -33,6 +35,8 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
     {
         SetDeckCardInfo(); //게임이 시작될 때 덱의 데이터로 가져오도록 한다.
         SetDeckCount(); //가장 처음 들고 있는 카드 수를 덱 버튼에 텍스트로 보여준다.
+
+        isInit = true;
     }
 
     public IEnumerator GetHandCards() //덱의 카드를 핸드로 가져오는 함수, 턴 종료 버튼의 On Click 이벤트에 DeckManager를 가진 덱 버튼을 넣어주고, 설정한다.
@@ -68,8 +72,39 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
             Destroy(HandManager.Instance.transform.GetChild(i).gameObject); //사용하지 않은 핸드의 카드들을 삭제한다.
         }
 
-        StartCoroutine(GetHandCards());
+        //StartCoroutine(GetHandCards());
         SetDeckCount(); //덱 버튼 텍스트 변경
+    }
+
+    public void GoDeck2Hand() //GameManager에서 타이밍을 조절해준다.
+    {
+        StartCoroutine(Deck2HandDirect());
+    }
+
+    IEnumerator Deck2HandDirect() //카드를 한 번에 받지 않고 한 장씩 받는 연출을 해준다.
+    {
+        //덱에서 핸드로 카드를 보낸다. 위의 GetHandCards와 동일
+        int _count = drawCount;
+        if (drawCount > deckCardStats.Count) //덱에 있는 카드 수보다 드로우 카드 수가 더 많으면 남은 카드 수만큼만 드로우할 수 있도록 제한한다.
+            _count = deckCardStats.Count;
+
+        for (int i = 0; i < _count; i++)
+        {
+            int _rnd = Random.Range(0, deckCardStats.Count); //0부터 덱 리스트에 있는 갯수 중 랜덤한 수를 뽑는다.
+
+            GameObject _obj = Instantiate(originCard, HandManager.Instance.transform); //HandManager를 가지고 있는 핸드 위치에 카드 오브젝트 생성
+
+            _obj.GetComponent<CardInfo>().SetCardInfo(deckCardStats[_rnd]); //카드 오브젝트에 랜덤으로 뽑은 카드의 정보를 담아 게임 화면에 보여준다.
+            _obj.GetComponent<CardController>().isDeck = false; //핸드로 생성 시 CardController에 있는 isDeck을 false로 설정해준다.
+
+
+            deckCardStats.RemoveAt(_rnd); //카드를 핸드로 생성함과 동시에 덱에서는 삭제해준다.
+
+            HandManager.Instance.SetCardPositions(); //카드를 핸드에 생성하면서 위치를 조정해준다.
+            SetDeckCount(); //덱 버튼 텍스트 변경
+
+            yield return new WaitForSeconds(0.15f); //카드를 0.15초 간격으로 받도록 한다.
+        }
     }
 
     public List<CardStats> deckCardStats; //위에서 int 리스트로 선언했던 deckList를 아래의 SetCardInfo와 SetDeckCardInfo를 통해 실제 데이터로 변환해준다.

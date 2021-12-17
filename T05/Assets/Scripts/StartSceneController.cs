@@ -7,6 +7,6 @@ public class StartSceneController : MonoBehaviour
 {
     public void GoNextScene()
     {
-        SceneManager.LoadScene("BattleScene"); //BattleScene으로 이동한다.
+        SceneManager.LoadScene("StageSelectScene"); //StageSelectScene으로 이동한다.
     }
 }

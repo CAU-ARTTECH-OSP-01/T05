@@ -76,11 +76,16 @@ public class PlayerController : MonoBehaviour
             if (playerStatus_Current.HP <= 0) //HP가 0보다 작다면 죽음 처리
             {
                 playerStatus_Current.HP = 0;
-                print("플레이어 죽음");
+                GameManager.Instance.PlayerDeath();
             }
         }
         else
             playerStatus_Current.Shield -= _dmg; //쉴드량이 충분하다면 쉴드에 데미지 계산
+    }
+
+    public void ShieldBreak() //턴이 끝날 때 쉴드를 없애준다.
+    {
+        playerStatus_Current.Shield = 0;
     }
 
     public void GetShield(int _shield) //쉴드를 추가해준다.
