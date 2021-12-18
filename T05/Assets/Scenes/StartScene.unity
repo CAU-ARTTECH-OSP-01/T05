@@ -567,7 +567,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1790186401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db7ca53d91a6ffc4cb4fd36fa1e45b1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bbd3be8f398ab04a8a218f83fe2d04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1790186403
@@ -737,8 +737,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1790186402}
-        m_TargetAssemblyTypeName: StartSceneController, Assembly-CSharp
-        m_MethodName: GoNextScene
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: GoSelectScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

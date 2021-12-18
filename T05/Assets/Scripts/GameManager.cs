@@ -150,8 +150,6 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
 
         DataBase.Instance.playerStatus = player.GetComponent<PlayerController>().playerStatus_Current; //승리 시 플레이어의 HP를 다음 스테이지에서도 사용할 수 있도록 한다.
         DataBase.Instance.stage++;
-        if (DataBase.Instance.stage > 4)
-            SceneManager.LoadScene("EndingScene");
     }
     IEnumerator Popup_Win()
     {
