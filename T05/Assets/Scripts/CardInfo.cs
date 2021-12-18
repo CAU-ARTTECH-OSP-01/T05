@@ -8,7 +8,7 @@ using UnityEngine.UI; //UI 관련 사용을 하기 위해 using 선언
 public enum CardComponent //속성에는 여러 가지 종류가 있고, 그 종류가 한정되어 있음. 그걸 하나의 변수로 사용하기 위해 enum 이용.
                           //Inspector 창에서 드롭다운 메뉴로 쉽게 접근 가능.
 {
-    ATK, SHD, HEL, SEL, DOT, UP_ATK, DOWN_ATK, UP_SHD, DOWN_SHD //필요할 때마다 추가해서 사용
+    ATK, SHD, HEL, SEL //필요할 때마다 추가해서 사용
 }
 
 [Serializable]
@@ -84,16 +84,6 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
                 _component = CardComponent.HEL;
             else if (_data["Component_" + i] == "SEL")
                 _component = CardComponent.SEL;
-            else if (_data["Component_" + i] == "DOT")
-                _component = CardComponent.DOT;
-            else if (_data["Component_" + i] == "UP_ATK")
-                _component = CardComponent.UP_ATK;
-            else if (_data["Component_" + i] == "DOWN_ATK")
-                _component = CardComponent.DOWN_ATK;
-            else if (_data["Component_" + i] == "UP_SHD")
-                _component = CardComponent.UP_SHD;
-            else if (_data["Component_" + i] == "DOWN_SHD")
-                _component = CardComponent.DOWN_SHD;
 
             ComponentStats _stats = new ComponentStats() //리스트를 감싸줄 ComponentStats를 지역 변수로 선언
             {
@@ -134,16 +124,6 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
                 _sprite = icons[2];
             else if (stats.components[i].component == CardComponent.SEL)
                 _sprite = icons[3];
-            else if (stats.components[i].component == CardComponent.DOT)
-                _sprite = icons[4];
-            else if (stats.components[i].component == CardComponent.UP_ATK)
-                _sprite = icons[5];
-            else if (stats.components[i].component == CardComponent.DOWN_ATK)
-                _sprite = icons[6];
-            else if (stats.components[i].component == CardComponent.UP_SHD)
-                _sprite = icons[7];
-            else if (stats.components[i].component == CardComponent.DOWN_SHD)
-                _sprite = icons[8];
 
             components[i].transform.GetChild(0).GetComponent<Image>().sprite = _sprite; //넣어 준 이미지를 게임 화면에 보여준다.
             components[i].transform.GetChild(1).GetComponent<Text>().text = stats.components[i].value.ToString();
@@ -153,7 +133,7 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
         }
     }
 
-    public void CardUse() //카드가 사용되었을 때 count값 변화
+    public void CardUse() //카드가 사용되었을 때의 행동
     {
         stats.count--;
 
@@ -174,21 +154,6 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
                 break;
             case CardComponent.SEL:
                 GameManager.Instance.Self(stats.components[_rnd].value);
-                break;
-            case CardComponent.DOT:
-                GameManager.Instance.Dot(stats.rare, stats.components[_rnd].value);
-                break;
-            case CardComponent.UP_ATK:
-                GameManager.Instance.Up_Attack(stats.rare, stats.components[_rnd].value);
-                break;
-            case CardComponent.DOWN_ATK:
-                GameManager.Instance.Down_Attack(stats.rare, stats.components[_rnd].value);
-                break;
-            case CardComponent.UP_SHD:
-                GameManager.Instance.Up_Shield(stats.rare, stats.components[_rnd].value);
-                break;
-            case CardComponent.DOWN_SHD:
-                GameManager.Instance.Down_Shield(stats.rare, stats.components[_rnd].value);
                 break;
         }
 

@@ -25,6 +25,8 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
     public GameObject originCard; //카드 오브젝트 생성을 위해 선언
     public int drawCount; //드로우할 카드 수 선언
 
+    
+
     /*private void Start()
     {
         SetDeckCardInfo(); //게임이 시작될 때 덱의 데이터로 가져오도록 한다.
@@ -83,6 +85,7 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
 
     IEnumerator Deck2HandDirect() //카드를 한 번에 받지 않고 한 장씩 받는 연출을 해준다.
     {
+        HandManager.Instance.Init(); //카드를 받을 때마다 HandManager의 리스트들을 초기화 해준다.
         //덱에서 핸드로 카드를 보낸다. 위의 GetHandCards와 동일
         int _count = drawCount;
         if (drawCount > deckCardStats.Count) //덱에 있는 카드 수보다 드로우 카드 수가 더 많으면 남은 카드 수만큼만 드로우할 수 있도록 제한한다.
@@ -92,7 +95,11 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
         {
             int _rnd = Random.Range(0, deckCardStats.Count); //0부터 덱 리스트에 있는 갯수 중 랜덤한 수를 뽑는다.
 
+            HandManager.Instance.SetDrawCard(_rnd); //HandManager의 cardInfos 리스트에 생성된 랜덤한 카드 정보를 담아준다.
+
             GameObject _obj = Instantiate(originCard, HandManager.Instance.transform); //HandManager를 가지고 있는 핸드 위치에 카드 오브젝트 생성
+
+            HandManager.Instance.cardObjects.Add(_obj); //HandManager의 cardObject 리스트에 생성된 카드 오브젝트를 순서대로 정리해준다.
 
             _obj.GetComponent<CardInfo>().SetCardInfo(deckCardStats[_rnd]); //카드 오브젝트에 랜덤으로 뽑은 카드의 정보를 담아 게임 화면에 보여준다.
             _obj.GetComponent<CardController>().isDeck = false; //핸드로 생성 시 CardController에 있는 isDeck을 false로 설정해준다.

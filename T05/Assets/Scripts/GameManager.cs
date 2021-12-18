@@ -87,26 +87,6 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
     {
         player.GetComponent<PlayerController>().GetDamage(_amount);
     }
-    public void Dot(int _turn,int _amount)
-    {
-        print("도트");
-    }
-    public void Up_Attack(int _turn,int _amount)
-    {
-        print("공격 버프");
-    }
-    public void Down_Attack(int _turn,int _amount)
-    {
-        print("공격 디버프");
-    }
-    public void Up_Shield(int _turn,int _amount)
-    {
-        print("쉴드 버프");
-    }
-    public void Down_Shield(int _turn,int _amount)
-    {
-        print("쉴드 디버프");
-    }
 
     public void Attack_Enemy(int _amount)
     {
