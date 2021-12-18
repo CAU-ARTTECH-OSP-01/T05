@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
 
     public void TurnEnd()
     {
-        turnEndButton.SetActive(false);
+        turnEndButton.SetActive(false); //턴 종료 버튼을 계속해서 누르는 것을 방지하기 위해 꺼둔다.
         turn++;
         StartCoroutine(BattleDelay());
     }
@@ -103,6 +103,11 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
     IEnumerator BattleDelay() //턴 종료 버튼을 눌렀을 때 행동 사이사이에 딜레이를 넣어준다.
     {
         DeckManager.Instance.BackCards2Deck(); //캐릭터 핸드 덱으로 이동
+
+        DeckManager.Instance.deckCardStats.Sort(delegate (CardStats A, CardStats B)
+        {
+            return A.index.CompareTo(B.index);
+        });
 
         yield return new WaitForSeconds(0.5f);
 
@@ -118,16 +123,16 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
 
         yield return new WaitForSeconds(0.5f);
 
-        DeckManager.Instance.GoDeck2Hand();
+        DeckManager.Instance.GoDeck2Hand(); //덱에서 핸드로 카드를 준다.
 
-        turnEndButton.SetActive(true);
+        turnEndButton.SetActive(true); //꺼놓았던 턴 종료 버튼을 켜준다.
     }
 
     //승패 판단
     public void PlayerDeath() //패배
     {
         print("플레이어 죽음");
-        Destroy(player);
+        //Destroy(player);
         StartCoroutine(Popup_Lose());
     }
     IEnumerator Popup_Lose()
@@ -139,12 +144,15 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
     public void EnemyDeath() //승리
     {
         print("적 죽음");
-        Destroy(enemy);
+        //Destroy(enemy);
         StartCoroutine(Popup_Win());
+
+        DataBase.Instance.playerStatus = player.GetComponent<PlayerController>().playerStatus_Current; //승리 시 플레이어의 HP를 다음 스테이지에서도 사용할 수 있도록 한다.
     }
     IEnumerator Popup_Win()
     {
         yield return new WaitForSeconds(0.5f);
+        player.GetComponent<PlayerController>().ShieldBreak(); //쉴드를 가진 채로 게임이 종료되면 다음 스테이지로 넘어가게 되는 오류 해결
         popup_Win.SetActive(true);
     }
 }

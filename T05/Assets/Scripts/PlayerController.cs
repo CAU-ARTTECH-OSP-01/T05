@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Status _status = new Status() //enemyStatus_Current = enemyStatus로 구성하게 되면 주소 값을 받아오기 때문에 변경을 해도 값이 같은 문제가 발생한다.
+        Status _status = new Status() //playerStatus_Current = playerStatus로 구성하게 되면 주소 값을 받아오기 때문에 변경을 해도 값이 같은 문제가 발생한다.
                                       //해결을 위해 다른 주소 값에 넣어주고 가져오는 방식으로 구성한다.
         {
-            HP = playerStatus.HP,
-            Shield = playerStatus.Shield
+            HP = DataBase.Instance.playerStatus.HP,
+            Shield = DataBase.Instance.playerStatus.Shield
         };
         playerStatus_Current = _status; //시작하면서 현재 적의 Status와 기본 값을 동일하게 맞춰준다.
 
@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     void SetPlayerDeck()
     {
         List<int> _list = new List<int>(); //_list 리스트에 새로운 주소 값 할당
+
+        DataBase.Instance.cardInventory.Sort();
 
         for (int i = 0; i < DataBase.Instance.cardInventory.Count; i++)
         {

@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadeb60baa8f28740a4f6517d45a665f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardInventory: 000000000100000002000000
+  cardInventory: 00000000010000000200000003000000040000000000000000000000000000000000000000000000
   enemyList:
   - {fileID: 7795802193186885581, guid: 8897a10ddaafaf34d8b029aa0b0d1965, type: 3}
   - {fileID: 7795802193186885581, guid: 32ebabe8c7e7bc1429670ee8f35e75f6, type: 3}
@@ -438,6 +438,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: afad2b92294a6c2418ab4d3b637c923b, type: 3}
   - {fileID: 21300000, guid: 14a45eb45cd25f146a525654ff9d80dd, type: 3}
   - {fileID: 21300000, guid: 8fc249b8a1f50e34c8afd5c7528a289c, type: 3}
+  stage: 0
+  cardTypes: 0
+  playerStatus:
+    HP: 10
+    Shield: 0
 --- !u!4 &1177904920
 Transform:
   m_ObjectHideFlags: 0

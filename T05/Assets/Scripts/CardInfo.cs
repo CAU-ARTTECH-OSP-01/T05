@@ -163,11 +163,21 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
         {
             print("카드 묘지로 이동"); //덱으로 이동하는 코드 참고해서 구현
             DeckManager.Instance.graveCardStats.Add(stats); //사용 횟수가 0이 되면 graveCardStats 리스트로 카드 이동
+
+            DeckManager.Instance.graveCardStats.Sort(delegate (CardStats A, CardStats B)
+            {
+                return A.index.CompareTo(B.index);
+            });
         }
         else
         {
             print("덱으로 이동");
             DeckManager.Instance.deckCardStats.Add(stats);
+
+            DeckManager.Instance.deckCardStats.Sort(delegate (CardStats A, CardStats B)
+            {
+                return A.index.CompareTo(B.index);
+            });
         }
         DeckManager.Instance.SetDeckCount(); //카드가 사용되었을 때 덱 버튼 텍스트 변경
         HandManager.Instance.WaitDeleteCard(); //카드가 사용되었을 때 위치 초기화

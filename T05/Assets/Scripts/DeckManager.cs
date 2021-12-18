@@ -93,7 +93,7 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
 
         for (int i = 0; i < _count; i++)
         {
-            int _rnd = Random.Range(0, deckCardStats.Count); //0부터 덱 리스트에 있는 갯수 중 랜덤한 수를 뽑는다.
+            int _rnd = Random.Range(0, deckCardStats.Count); //0부터 덱 리스트에 있는 개수 중 랜덤한 수를 뽑는다.
 
             HandManager.Instance.SetDrawCard(_rnd); //HandManager의 cardInfos 리스트에 생성된 랜덤한 카드 정보를 담아준다.
 
