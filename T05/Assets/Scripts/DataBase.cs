@@ -22,7 +22,8 @@ public class DataBase : MonoBehaviour
     public List<int> cardInventory; //플레이어가 가지고 있는 덱
     public List<GameObject> enemyList; //Prefab으로 만들어 준 적을 리스트 내에 넣어 각 BattleScene에 맞는 적 데이터를 불러올 수 있도록 관리한다.
     public List<Sprite> battleStageList; //배틀 스테이지 sprite 리스트를 각 BattleScene에서 불러올 수 있도록 GameManager에서 사용한다.
-    public int stage = 1; //스테이지 선택 화면에서 번호를 받아 GameManager로 넘겨준다.
+    public List<Sprite> stageSelectSceneList; //스테이지 선택 화면 sprite 리스트로, GameManager에서 사용한다.
+    public int stage = 0; //스테이지 선택 화면에서 번호를 받아 GameManager로 넘겨준다.
 
     public int cardTypes; //카드 종류의 총 개수
 

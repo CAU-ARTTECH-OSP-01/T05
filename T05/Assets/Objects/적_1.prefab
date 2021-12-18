@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStatus:
-    HP: 100
+    HP: 10
     Shield: 0
   enemyStatus_Current:
     HP: 0

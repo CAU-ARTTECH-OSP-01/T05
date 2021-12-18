@@ -438,6 +438,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: afad2b92294a6c2418ab4d3b637c923b, type: 3}
   - {fileID: 21300000, guid: 14a45eb45cd25f146a525654ff9d80dd, type: 3}
   - {fileID: 21300000, guid: 8fc249b8a1f50e34c8afd5c7528a289c, type: 3}
+  stageSelectSceneList:
+  - {fileID: -1763569427965761232, guid: 423ac38fc228c2a44bdac1f012c87947, type: 3}
+  - {fileID: -3109690115745357474, guid: 6cca7d2cc6c53d0498478439d15a0ba9, type: 3}
+  - {fileID: 8967078392781570145, guid: 073a7a4719857ec469cc5674804bb82d, type: 3}
+  - {fileID: -2052554668379268604, guid: fe2fdbcc1897fab4fa373f954e829225, type: 3}
+  - {fileID: -139513496510059335, guid: 46a925ce884ecc4469f2b70cb5bbaa9a, type: 3}
   stage: 0
   cardTypes: 0
   playerStatus:
