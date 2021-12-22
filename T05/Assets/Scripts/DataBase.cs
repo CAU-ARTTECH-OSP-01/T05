@@ -14,7 +14,10 @@ public class DataBase : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject); //DataBase를 가진 오브젝트를 Scene이 변경되더라도 사라지지 않게 한다.
     }
