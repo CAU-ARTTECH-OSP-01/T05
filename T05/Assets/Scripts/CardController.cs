@@ -15,6 +15,9 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
     public bool isClicked;
     public bool isDeck = true; //ÇÚµå·Î °¡°Ô µÇ´Â »óÈ²¿¡¼­ false·Î ¹Ù²ãÁØ´Ù.
 
+    public bool isUse = false;
+    public bool isUsing = false;
+
     public Camera cam;
 
     public void SetCardDefaultPos() //HandManagerÀÇ SetCardPositions¿¡ ³Ö¾î Ã³À½ Ä«µåÀÇ À§Ä¡¸¦ ÁöÁ¤ÇØÁÖµµ·Ï ÇÑ´Ù.
@@ -25,8 +28,9 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
 
     public void PointerEnter() //Ä«µå ¿ÀºêÁ§Æ®¿¡ Event Trigger ÄÄÆ÷³ÍÆ® ºÎÂø ÈÄ, Pointer Enter¸¦ Ãß°¡ÇÏ¿© »ç¿ëÇÑ´Ù.
     {
-        if (!isDeck)
+        if (!isDeck && !isUse && !isUsing)
         {
+            //SoundManager.PlaySFX("TouchCard");
             transform.localScale = Vector3.one * expandRatio; //Ä«µå È®´ë, new Vector3(expandRatio, expandRatio, expandRatio)¿Í °°´Ù.
 
             transform.GetComponent<RectTransform>().anchoredPosition //RectTransformÀÇ anchoredPositionÀ» ÀÌ¿ëÇÏ¸é InspectorÃ¢¿¡¼­ º¸ÀÌ´Â ÁÂÇ¥¸¦ ±×´ë·Î »ç¿ëÇÒ ¼ö ÀÖ´Ù.
@@ -38,7 +42,7 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
     }
     public void PointerExit() //¿ø·¡ »óÅÂ·Î µÇµ¹¸°´Ù.
     {
-        if (!isDeck)
+        if (!isDeck && !isUse && !isUsing)
         {
             transform.localScale = Vector3.one;
 
@@ -49,7 +53,7 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
 
     public void CardClick()
     {
-        if (!isClicked && !isDeck)
+        if (!isClicked && !isDeck && !isUse && !isUsing)
         {
             isClicked = true;
             cam = GameObject.Find("Main Camera").GetComponent<Camera>(); //Main Camera ¿ÀºêÁ§Æ®¿Í ±× ¾ÈÀÇ Camera ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿Â´Ù.
@@ -58,7 +62,7 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
 
     public void CardDrag()
     {
-        if (isClicked && !isDeck)
+        if (isClicked && !isDeck && !isUse && !isUsing)
         {
             Vector2 _mousePosition = Input.mousePosition; //¸¶¿ì½º À§Ä¡¸¦ _mousePositionÀ¸·Î ¹Þ¾Æ¿Â´Ù.
             Vector2 _targetPosition = cam.ScreenToWorldPoint(_mousePosition); // ¸¶¿ì½º À§Ä¡¸¦ ¿ùµå ÁÂÇ¥·Î ÁöÁ¤ÇÑ´Ù.
@@ -68,7 +72,7 @@ public class CardController : MonoBehaviour //Ä«µå¸¦ ¼±ÅÃÇÏ°í, µå·¡±×ÇÏ´Â µî Ä«µ
     }
     public void CardDrop()
     {
-        if (isClicked && !isDeck)
+        if (isClicked && !isDeck && !isUse && !isUsing)
         {
             if (transform.GetComponent<RectTransform>().anchoredPosition.y >= usePos_y) //»ç¿ë ³ôÀÌº¸´Ù ³ô°Å³ª °°À» ¶§ Ä«µå°¡ »ç¿ëµÇµµ·Ï ¼³Á¤
             {

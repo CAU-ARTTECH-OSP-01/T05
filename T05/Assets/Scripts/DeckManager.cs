@@ -24,7 +24,6 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
 
     public GameObject originCard; //카드 오브젝트 생성을 위해 선언
     public int drawCount; //드로우할 카드 수 선언
-
     
 
     /*private void Start()
@@ -104,11 +103,14 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
             _obj.GetComponent<CardInfo>().SetCardInfo(deckCardStats[_rnd]); //카드 오브젝트에 랜덤으로 뽑은 카드의 정보를 담아 게임 화면에 보여준다.
             _obj.GetComponent<CardController>().isDeck = false; //핸드로 생성 시 CardController에 있는 isDeck을 false로 설정해준다.
 
+            //_obj.transform.position = GameObject.Find("덱 버튼").transform.position; //덱 버튼의 위치에 생성한 카드를 놓는다.
 
             deckCardStats.RemoveAt(_rnd); //카드를 핸드로 생성함과 동시에 덱에서는 삭제해준다.
 
             HandManager.Instance.SetCardPositions(); //카드를 핸드에 생성하면서 위치를 조정해준다.
             SetDeckCount(); //덱 버튼 텍스트 변경
+
+            //SoundManager.PlaySFX("DrawCard");
 
             yield return new WaitForSeconds(0.15f); //카드를 0.15초 간격으로 받도록 한다.
         }
@@ -132,6 +134,7 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
         stats.name = _data["Name"];
         stats.count = int.Parse(_data["Count"]);
         stats.rare = int.Parse(_data["Rare"]);
+        stats.image = Resources.Load<Sprite>(_data["Image"]);
 
         for (int i = 0; i < 6; i++)
         {
@@ -157,12 +160,51 @@ public class DeckManager : MonoBehaviour //덱 버튼에 컴포넌트로 넣어준다.
         return stats; //stats 값을 반환해준다.
     }
 
+    public __CardStats __SetCardInfo(Dictionary<string, string> _data) //CardInfo의 SetCardInfo 주석 참고
+                                                                   //CardStats 값을 반환해준다.
+    {
+        __CardStats __stats = new __CardStats()
+        {
+            __components = new List<__ComponentStats>()
+        };
+        __stats.__components.Clear();
+
+        __stats.__index = int.Parse(_data["Index"]);
+        __stats.__name = _data["Name"];
+        __stats.__count = int.Parse(_data["Count"]);
+        __stats.__rare = int.Parse(_data["Rare"]);
+        __stats.__image = Resources.Load<Sprite>(_data["Image"]);
+
+        for (int i = 0; i < 6; i++)
+        {
+            __CardComponent _component = __CardComponent.ATK;
+
+            if (_data["Component_" + i] == "ATK")
+                _component = __CardComponent.ATK;
+            else if (_data["Component_" + i] == "SHD")
+                _component = __CardComponent.SHD;
+            else if (_data["Component_" + i] == "HEL")
+                _component = __CardComponent.HEL;
+            else if (_data["Component_" + i] == "SEL")
+                _component = __CardComponent.SEL;
+
+            __ComponentStats _stats = new __ComponentStats()
+            {
+                __component = _component,
+                __value = int.Parse(_data["Value_" + i])
+            };
+
+            __stats.__components.Add(_stats);
+        }
+        return __stats; //stats 값을 반환해준다.
+    }
+
     void SetDeckCardInfo() //Popup_Deck의 OpenDeck 주석 참고
     {
         deckCardStats.Clear(); //실행될 때마다 deckCardStats의 요소가 추가될 것을 대비해 초기화를 시켜준다.
 
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
-        data = DataReader_TSV.ReadDataByTSV("Data/CardList");
+        data = DataReader_CSV.ReadDataByCSV("CardList");
 
         List<int> _list = DeckManager.Instance.deckList;
 

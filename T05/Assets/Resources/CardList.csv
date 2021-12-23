@@ -1,0 +1,16 @@
+Index,Name,Count,Rare,Image,Component_0,Value_0,Component_1,Value_1,Component_2,Value_2,Component_3,Value_3,Component_4,Value_4,Component_5,Value_5
+0,기본 공격,99,1,CardImages/dice_attack,ATK,3,ATK,3,ATK,4,ATK,4,ATK,5,ATK,5
+1,기본 공격2,99,1,CardImages/dice_attack,ATK,3,ATK,3,ATK,3,ATK,5,ATK,5,ATK,5
+2,강화 공격,1,3,CardImages/dice_attack,ATK,6,ATK,6,ATK,6,ATK,7,ATK,7,ATK,8
+3,공격 방어,2,1,CardImages/dice_attack+defense,ATK,4,ATK,4,ATK,5,SHD,3,SHD,3,SHD,4
+4,이판사판,2,3,CardImages/dice_attack+self,ATK,5,ATK,6,ATK,7,ATK,8,SEL,4,SEL,5
+5,랜덤 공격,4,2,CardImages/dice_attack,ATK,3,ATK,4,ATK,5,ATK,6,ATK,7,ATK,8
+6,운칠기삼,1,2,CardImages/dice_attack+defense,ATK,1,ATK,5,ATK,10,SHD,2,SHD,3,SEL,6
+7,기본방어,99,1,CardImages/dice_defense,SHD,3,SHD,3,SHD,4,SHD,4,SHD,5,SHD,5
+8,강화 방어,1,3,CardImages/dice_defense,SHD,6,SHD,6,SHD,6,SHD,7,SHD,7,SHD,8
+9,모 아니면 도,2,2,CardImages/dice_defense+self,SHD,5,SHD,6,SHD,7,SHD,8,SEL,4,SEL,5
+10,랜덤 방어,4,3,CardImages/dice_defense,SHD,2,SHD,2,SHD,4,SHD,4,SHD,4,SHD,8
+11,기본 회복,99,1,CardImages/dice_heal,HEL,2,HEL,2,HEL,2,HEL,3,HEL,3,HEL,4
+12,강화 회복,1,3,CardImages/dice_heal,HEL,4,HEL,4,HEL,4,HEL,5,HEL,5,HEL,6
+13,럭키 회복,2,3,CardImages/dice_heal+self,HEL,4,HEL,5,HEL,6,HEL,7,SEL,3,SEL,4
+14,회복 방어,2,1,CardImages/dice_defense+heal,SHD,4,SHD,4,SHD,5,SHD,6,HEL,3,HEL,4

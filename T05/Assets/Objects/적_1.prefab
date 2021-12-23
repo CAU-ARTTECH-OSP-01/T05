@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7795802191475658218}
   - component: {fileID: 7795802191475658221}
+  - component: {fileID: 4839171295300761063}
   m_Layer: 0
   m_Name: "\uC774\uBBF8\uC9C0"
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7795802191475658219}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.113, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7795802193186885583}
@@ -71,17 +72,36 @@ SpriteRenderer:
   m_SortingLayerID: -474567613
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7723652632321733531, guid: 94fcb1992ae5c2f4fa68515cf39ba35d, type: 3}
+  m_Sprite: {fileID: 5292162782370725093, guid: 94fcb1992ae5c2f4fa68515cf39ba35d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.46, y: 0.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4839171295300761063
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795802191475658219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc4675b0e79370f4483e7ce8c3e9a17f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7795802191910105870
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!1 &7795802191960113529
@@ -212,7 +232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.3}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7795802191960113530
@@ -516,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!1 &7795802192577561458
@@ -842,7 +862,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -866,7 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!1 &7795802193186885581
@@ -915,22 +935,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStatus:
-    HP: 10
+    HP: 20
     Shield: 0
   enemyStatus_Current:
     HP: 0
     Shield: 0
   patterns:
-  - Attack: 10
-    Defence: 0
-  - Attack: 0
-    Defence: 10
-  - Attack: 1
-    Defence: 10
-  - Attack: 2
-    Defence: 10
   - Attack: 3
-    Defence: 10
+    Defence: 3
+  - Attack: 4
+    Defence: 2
+  - Attack: 2
+    Defence: 4
+  - Attack: 3
+    Defence: 4
+  - Attack: 5
+    Defence: 2
   turn: 0
   currentPattern:
     Attack: 0
@@ -943,7 +963,8 @@ MonoBehaviour:
   ui_ShieldCount: {fileID: 7795802193183493956}
   ui_HPGauge: {fileID: 7795802193281173876}
   ui_HPCount: {fileID: 7795802191960113528}
-  dropCards: 
+  dropCards: 040000000500000006000000090000000a00000008000000
+  animator: {fileID: 4839171295300761063}
 --- !u!1 &7795802193281173875
 GameObject:
   m_ObjectHideFlags: 0

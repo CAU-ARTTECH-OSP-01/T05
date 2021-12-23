@@ -25,7 +25,7 @@ public class Popup_Grave : MonoBehaviour
         Init();
 
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
-        data = DataReader_TSV.ReadDataByTSV("Data/CardList");
+        data = DataReader_CSV.ReadDataByCSV("CardList");
 
         List<CardStats> _list = DeckManager.Instance.graveCardStats;
 

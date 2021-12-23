@@ -65,6 +65,7 @@ public class HandManager : MonoBehaviour //핸드 오브젝트에 컴포넌트로 넣어서 사�
         }
     }
 
+
     public IEnumerator SetCardPositions_WaitDeleteCard() //카드가 사용된 후 삭제될 때까지 기다린 후 자리 배치를 하도록 한다.
     {
         yield return new WaitForSeconds(0.1f); //0.1초 정도 기다려 준다.

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//using DG.Tweening;
 
 public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레이어와 적 데이터를 가져와 생성해준다.
 {
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
     public GameObject popup_Win; //승리 팝업
     public GameObject popup_Lose; //패배 팝업
 
+    public GameObject player_Victory;
+    public GameObject player_Defeat;
+    public Animator player_animator_victory;
+    public Animator player_animator_defeat;
+
 
     private void Start()
     {
@@ -63,12 +69,20 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
 
     public void EnemySpawner() //적 생성
     {
-        enemy = Instantiate(DataBase.Instance.enemyList[stage]);
+        int _rnd = stage;
+        if (stage >= 4)
+        {
+            _rnd = Random.Range(4, 7);
+            print(_rnd);
+        }
+        enemy = Instantiate(DataBase.Instance.enemyList[_rnd]);
     }
 
     public void StageSpawner() //스테이지 배경 생성
     {
         battleBG.GetComponent<SpriteRenderer>().sprite = DataBase.Instance.battleStageList[stage];
+
+        //SoundManager.PlayMusic(stage); 스테이지 음악 
     }
 
     //전투 관련, 적과 플레이어 모두의 데이터를 가진 GameManager에서 실행해준다.
@@ -91,7 +105,8 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
 
     public void Attack_Enemy(int _amount)
     {
-        player.GetComponent<PlayerController>().GetDamage(_amount);
+        if (_amount != 0)
+            player.GetComponent<PlayerController>().GetDamage(_amount);
     }
 
     public void TurnEnd()
@@ -126,6 +141,8 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
 
         DeckManager.Instance.GoDeck2Hand(); //덱에서 핸드로 카드를 준다.
 
+        yield return new WaitForSeconds(0.5f);
+
         turnEndButton.SetActive(true); //꺼놓았던 턴 종료 버튼을 켜준다.
     }
 
@@ -134,18 +151,29 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
     {
         print("플레이어 죽음");
         //Destroy(player);
+        GameObject.Find("플레이어 캔버스").SetActive(false);
+        //player.transform.GetChild(1).GetComponent<SpriteRenderer>().DOFade(0f, 2f);
         StartCoroutine(Popup_Lose());
+
     }
     IEnumerator Popup_Lose()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.5f);
         popup_Lose.SetActive(true);
+
+        player_Defeat.SetActive(true);
+        player_animator_defeat.SetTrigger("Defeat");
+
+        //SoundManager.PlaySFX("Defeat");
     }
 
     public void EnemyDeath() //승리
     {
         print("적 죽음");
         //Destroy(enemy);
+        GameObject.Find("적 캔버스").SetActive(false);
+        //enemy.transform.GetChild(1).GetComponent<SpriteRenderer>().DOFade(0f, 2f);
+
         StartCoroutine(Popup_Win());
 
         DataBase.Instance.playerStatus = player.GetComponent<PlayerController>().playerStatus_Current; //승리 시 플레이어의 HP를 다음 스테이지에서도 사용할 수 있도록 한다.
@@ -153,8 +181,13 @@ public class GameManager : MonoBehaviour //턴 계산, 승패 체크. DataBase에서 플레
     }
     IEnumerator Popup_Win()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.5f);
         player.GetComponent<PlayerController>().ShieldBreak(); //쉴드를 가진 채로 게임이 종료되면 다음 스테이지로 넘어가게 되는 오류 해결
         popup_Win.SetActive(true);
+        player_Victory.SetActive(true);
+        player_animator_victory.SetTrigger("Victory");
+        //enemy.transform.DOMoveX(1.3f, 0.5f);
+        //SoundManager.Instance.Stop("5");
+        //SoundManager.PlaySFX("Victory");
     }
 }

@@ -1,0 +1,456 @@
+fileFormatVersion: 2
+guid: e13056e238f847640bfadb8116efb4e8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6131582665398056998
+    second: Yujeong 0
+  - first:
+      213: 7110118047416377443
+    second: Yujeong 1
+  - first:
+      213: 6396167231810018046
+    second: Yujeong 2
+  - first:
+      213: -6736282061972122156
+    second: Yujeong 3
+  - first:
+      213: -8208213784667825026
+    second: Yujeong 4
+  - first:
+      213: 5234549151513134770
+    second: Yujeong 5
+  - first:
+      213: -5410612488255096143
+    second: Yujeong 6
+  - first:
+      213: 9193821211750008399
+    second: Yujeong 7
+  - first:
+      213: -2780405554397996399
+    second: Yujeong 8
+  - first:
+      213: 6758456387961811028
+    second: Yujeong 9
+  - first:
+      213: -8894300375979924274
+    second: Yujeong 10
+  - first:
+      213: 2716274574524220197
+    second: Yujeong 11
+  - first:
+      213: -6314239346559683861
+    second: Yujeong 12
+  - first:
+      213: -685717678739592827
+    second: Yujeong 13
+  - first:
+      213: -5228220384376520039
+    second: Yujeong 14
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 232
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Yujeong 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6287ef992f1c71550800000000000000
+      internalID: 6131582665398056998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 360e85f61b63ca260800000000000000
+      internalID: 7110118047416377443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 2
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efa97008530c3c850800000000000000
+      internalID: 6396167231810018046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 3
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d5d05da72be382a0800000000000000
+      internalID: -6736282061972122156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 4
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7cd8644d01961e80800000000000000
+      internalID: -8208213784667825026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b6434f28bad4a840800000000000000
+      internalID: 5234549151513134770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 51
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ba334ccb94a9e4b0800000000000000
+      internalID: -5410612488255096143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 7
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 51
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f468fce5ea3079f70800000000000000
+      internalID: 9193821211750008399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 8
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 51
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19a959621e30a69d0800000000000000
+      internalID: -2780405554397996399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 9
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 51
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 450fe6ae64cdacd50800000000000000
+      internalID: 6758456387961811028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec4e71c9ee8119480800000000000000
+      internalID: -8894300375979924274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52301f6855522b520800000000000000
+      internalID: 2716274574524220197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 12
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 0
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be2f381c4c05f58a0800000000000000
+      internalID: -6314239346559683861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 13
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 0
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 589658e7767db76f0800000000000000
+      internalID: -685717678739592827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yujeong 14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 58
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99208cdb241a177b0800000000000000
+      internalID: -5228220384376520039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

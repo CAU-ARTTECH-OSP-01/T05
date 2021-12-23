@@ -39,6 +39,8 @@ public class EnemyController : MonoBehaviour
 
     public List<int> dropCards; //게임 종료 후 드롭할 카드 리스트
 
+    public Animator animator;
+
 
     private void Start()
     {
@@ -122,6 +124,8 @@ public class EnemyController : MonoBehaviour
 
     public void GetDamage(int _dmg) //쉴드의 유무에 따라 데미지 계산이 달라지는 상황 계산
     {
+        StartCoroutine(GetDamage());
+
         if (enemyStatus_Current.Shield <= _dmg) //쉴드량이 더 작다면 쉴드부터 제거된 후 HP 계산
         {
             enemyStatus_Current.HP -= (_dmg - enemyStatus_Current.Shield);
@@ -137,6 +141,13 @@ public class EnemyController : MonoBehaviour
             enemyStatus_Current.Shield -= _dmg; //쉴드량이 충분하다면 쉴드에 데미지 계산
     }
 
+    IEnumerator GetDamage()
+    {
+        //SoundManager.PlaySFX("Attack");
+        animator.SetTrigger("Hurt");
+        yield return new WaitForSeconds(0.5f);
+    }
+
     public void ShieldBreak() //턴이 끝날 때 쉴드를 없애준다.
     {
         enemyStatus_Current.Shield = 0;
@@ -145,5 +156,6 @@ public class EnemyController : MonoBehaviour
     public void GetShield(int _shield) //쉴드를 추가해준다.
     {
         enemyStatus_Current.Shield += _shield;
+        //SoundManager.PlaySFX("Defence");
     }
 }

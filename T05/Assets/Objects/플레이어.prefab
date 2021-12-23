@@ -187,7 +187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.3}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8050860573035777997
@@ -257,6 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8050860573275343682}
   - component: {fileID: 8050860573275343683}
+  - component: {fileID: 1588231522854849880}
   m_Layer: 0
   m_Name: "\uC774\uBBF8\uC9C0"
   m_TagString: Untagged
@@ -272,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8050860573275343685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.067, y: -0.159, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8050860574192497701}
@@ -318,17 +319,36 @@ SpriteRenderer:
   m_SortingLayerID: -474567613
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 973301482186294925, guid: ea464cf94da7245418cc110ca4f0637a, type: 3}
+  m_Sprite: {fileID: -8497212893848132648, guid: ea464cf94da7245418cc110ca4f0637a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.61, y: 0.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1588231522854849880
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050860573275343685}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14c036ec814a34547be459af41ca02db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8050860573690862454
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatus:
-    HP: 10
+    HP: 50
     Shield: 0
   playerStatus_Current:
     HP: 0
@@ -562,6 +582,7 @@ MonoBehaviour:
   ui_ShieldCount: {fileID: 8050860574307094668}
   ui_HPGauge: {fileID: 8050860572872713444}
   ui_HPCount: {fileID: 8050860573035777999}
+  animator: {fileID: 1588231522854849880}
 --- !u!1 &8050860574307094657
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +651,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -654,6 +675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; //UI 관련 사용을 하기 위해 using 선언
+//using DG.Tweening;
 
 [Serializable] //Inspector 창에서 보여주기 위해 사용
 public enum CardComponent //속성에는 여러 가지 종류가 있고, 그 종류가 한정되어 있음. 그걸 하나의 변수로 사용하기 위해 enum 이용.
@@ -40,12 +41,21 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
     public Text txtName; //UnityEngine.UI 참조를 통해 Text 사용 가능
                          //변수로 선언함으로써 Inspector 창의 컴포넌트에서 접근할 수 있다.
     public Text txtCount;
+    public Image cardImage;
     public GameObject componentContainer; //주사위의 속성 text에 접근하기 위해 사용, '주사위 속성' 오브젝트를 불러오기 위해 사용한다.
     public List<GameObject> components; //주사위 속성 > 속성(0), 속성(1)...에 접근하기 위해 사용
 
+    public GameObject rollDirect; //주사위 롤 연출을 위해 선언
+
+    public Animator animator;
+    public Image rollImage;
+    public Text rollValue;
+
     void Init() //시작할 때 초기화해주기 위한 함수
     {
-        for(int i = 0; i < componentContainer.transform.childCount; i++) //transform.childCount를 통해 자식 오브젝트의 갯수를 구할 수 있다.
+        transform.GetComponent<CardController>().isUse = false;
+
+        for (int i = 0; i < componentContainer.transform.childCount; i++) //transform.childCount를 통해 자식 오브젝트의 갯수를 구할 수 있다.
                                                                          //주사위 속성의 자식 오브젝트인 속성(0)부터 속성(6)까지, 6의 값을 갖게 된다.
         {
             components.Add(componentContainer.transform.GetChild(i).gameObject);
@@ -53,6 +63,8 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
             //gameObject 형식의 자식 오브젝트를 리스트에 추가한다.
             //위에서 선언해 준 components 리스트에 i번째 자식 오브젝트를 추가해준다.
         }
+
+        rollDirect.SetActive(false);
     }
 
     public void SetCardInfo(Dictionary<string, string> _data) //카드에 데이터를 넣어주기 위한 SetCardInfo 전역 함수 선언.
@@ -113,7 +125,9 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
         txtCount.text = stats.count.ToString(); //text에는 string 값만 넣어줄 수 있고, count 값이 int 값이므로,
                                                 //변환해주기 위해 ToString() 함수를 이용해준다.
 
-        for(int i = 0; i < stats.components.Count; i++) //components 리스트의 갯수만큼 반복해준다.
+        cardImage.sprite = stats.image;
+
+        for (int i = 0; i < stats.components.Count; i++) //components 리스트의 갯수만큼 반복해준다.
         {
             Sprite _sprite = icons[0];
             if (stats.components[i].component == CardComponent.ATK) //components 리스트의 컴포넌트에 맞는 이미지를 넣어준다.
@@ -135,11 +149,62 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
 
     public void CardUse() //카드가 사용되었을 때의 행동
     {
-        stats.count--;
+        transform.GetComponent<CardController>().isUse = true;
+        StartCoroutine(CardUseDirect());
+    }
 
-        //카드 사용
+    Sprite GetIcon(int _index)
+    {
+        Sprite _sprite = icons[0];
+        if (stats.components[_index].component == CardComponent.ATK) //components 리스트의 컴포넌트에 맞는 이미지를 넣어준다.
+            _sprite = icons[0];
+        else if (stats.components[_index].component == CardComponent.SHD)
+            _sprite = icons[1];
+        else if (stats.components[_index].component == CardComponent.HEL)
+            _sprite = icons[2];
+        else if (stats.components[_index].component == CardComponent.SEL)
+            _sprite = icons[3];
+
+        return _sprite;
+    }
+
+    IEnumerator CardUseDirect() //카드 사용 시 연출
+    {
+        //SoundManager.PlaySFX("Dice1");
+        transform.GetComponent<CardController>().isUsing = true;
+        for (int i = 0; i < HandManager.Instance.cardObjects.Count; i++)
+        {
+            if (HandManager.Instance.cardObjects[i] == null)
+            {
+                break;
+            }
+
+            HandManager.Instance.cardObjects[i].GetComponent<CardController>().isUsing = true;
+        }
+        transform.position = Vector2.zero; //카드 사용 시 원점에 카드가 놓여진다.
+        //SoundManager.PlaySFX("UseCard"); //사용 효과음 재생
+        rollDirect.SetActive(true); //주사위 롤 연출을 켜준다.
+
+        for (int i = -1; ++i < 10;) //아이콘이 돌아가는 연출을 보여준다.
+        {
+            int __rnd = UnityEngine.Random.Range(0, stats.components.Count); //컴포넌트 중 하나 랜덤으로 선택
+            rollImage.sprite = GetIcon(__rnd);
+            rollValue.text = stats.components[__rnd].value.ToString();
+
+            yield return new WaitForSeconds(0.1f); //0.1초 딜레이를 걸어준다. 돌아가는 속도를 여기서 조절해주면 된다.
+        }
+
+        //SoundManager.PlaySFX("Dice2");
+
+        //카드 사용, CardUse와 동일
         int _rnd = UnityEngine.Random.Range(0, stats.components.Count); //컴포넌트 중 하나 랜덤으로 선택
         print("랜덤하게 뽑은 값 : " + _rnd + "\n랜덤하게 뽑은 컴포넌트 : " + stats.components[_rnd].component);
+        rollImage.sprite = GetIcon(_rnd);
+        rollValue.text = stats.components[_rnd].value.ToString();
+
+        animator.SetTrigger("Select"); //Select 애니메이션을 켜준다.
+
+        yield return new WaitForSeconds(0.5f); //0.5초 딜레이를 걸어준다. 카드 공격 애니메이션
 
         switch (stats.components[_rnd].component) //고른 컴포넌트에 따라 행동하게 해준다.
         {
@@ -157,31 +222,76 @@ public class CardInfo : MonoBehaviour //카드에 컴포넌트로 부착해서 사용
                 break;
         }
 
+        yield return new WaitForSeconds(0.5f); //0.5초 딜레이를 걸어준다.
+
+
+        stats.count--;
+
         SetCardComponents(); //count값이 변화한 내용을 카드에 적용
+
+        yield return new WaitForSeconds(0.5f); //0.5초 딜레이를 걸어준다.
+
 
         if (stats.count <= 0)
         {
             print("카드 묘지로 이동"); //덱으로 이동하는 코드 참고해서 구현
-            DeckManager.Instance.graveCardStats.Add(stats); //사용 횟수가 0이 되면 graveCardStats 리스트로 카드 이동
-
-            DeckManager.Instance.graveCardStats.Sort(delegate (CardStats A, CardStats B)
-            {
-                return A.index.CompareTo(B.index);
-            });
+            StartCoroutine(MoveCard2Target(GameObject.Find("묘지 버튼"), false));
         }
         else
         {
             print("덱으로 이동");
-            DeckManager.Instance.deckCardStats.Add(stats);
-
-            DeckManager.Instance.deckCardStats.Sort(delegate (CardStats A, CardStats B)
-            {
-                return A.index.CompareTo(B.index);
-            });
+            StartCoroutine(MoveCard2Target(GameObject.Find("덱 버튼"), true));
         }
-        DeckManager.Instance.SetDeckCount(); //카드가 사용되었을 때 덱 버튼 텍스트 변경
-        HandManager.Instance.WaitDeleteCard(); //카드가 사용되었을 때 위치 초기화
+        for (int i = 0; i < HandManager.Instance.cardObjects.Count; i++)
+        {
+            HandManager.Instance.cardObjects[i].GetComponent<CardController>().isUsing = false;
+        }
+    }
 
-        Destroy(gameObject); //사용된 카드들은 게임 화면에서 제거한다. (덱으로 돌아가거나 묘지로 이동)
+    public void CardDraw() //카드 드로우
+    {
+        StartCoroutine(CardDrawDirect());
+    }
+
+    IEnumerator CardDrawDirect() //카드 드로우 연출
+    {
+        yield return null;
+    }
+
+    IEnumerator MoveCard2Target(GameObject _target, bool _isDeck) //카드를 이동시키는 함수
+    {
+        while(true)
+        {
+            Vector3 _targetPos = _target.transform.position;
+            transform.position = Vector3.Lerp(transform.position, _targetPos, 0.15f);
+            //transform.DOScale(0.1f, 0.05f);
+            if (Vector3.Distance(transform.position, _targetPos) < 0.05f)
+            {
+                if (_isDeck)
+                {
+                    DeckManager.Instance.deckCardStats.Add(stats);
+                    DeckManager.Instance.deckCardStats.Sort(delegate (CardStats A, CardStats B)
+                    {
+                        return A.index.CompareTo(B.index);
+                    });
+                }
+
+                else
+                {
+                    DeckManager.Instance.graveCardStats.Add(stats); //사용 횟수가 0이 되면 graveCardStats 리스트로 카드 이동
+                    DeckManager.Instance.graveCardStats.Sort(delegate (CardStats A, CardStats B)
+                    {
+                        return A.index.CompareTo(B.index);
+                    });
+                }
+
+                DeckManager.Instance.SetDeckCount(); //카드가 사용되었을 때 덱 버튼 텍스트 변경
+                HandManager.Instance.WaitDeleteCard(); //카드가 사용되었을 때 위치 초기화
+                yield return new WaitForSeconds(0.05f);
+                Destroy(gameObject);
+                break;
+            }
+            yield return null;
+        }
     }
 }

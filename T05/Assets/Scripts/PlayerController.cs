@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public Image ui_HPGauge; // HP Image의 Filled 값을 조절하기 위해 생성
     public Text ui_HPCount; //HP Text
 
+    public Animator animator;
+
     private void Start()
     {
         Status _status = new Status() //playerStatus_Current = playerStatus로 구성하게 되면 주소 값을 받아오기 때문에 변경을 해도 값이 같은 문제가 발생한다.
@@ -70,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     public void GetDamage(int _dmg) //쉴드의 유무에 따라 데미지 계산이 달라지는 상황 계산
     {
+        StartCoroutine(GetDamage());
+
         if (playerStatus_Current.Shield <= _dmg) //쉴드량이 더 작다면 쉴드부터 제거된 후 HP 계산
         {
             playerStatus_Current.HP -= (_dmg - playerStatus_Current.Shield);
@@ -85,6 +89,13 @@ public class PlayerController : MonoBehaviour
             playerStatus_Current.Shield -= _dmg; //쉴드량이 충분하다면 쉴드에 데미지 계산
     }
 
+    IEnumerator GetDamage()
+    {
+        //SoundManager.PlaySFX("Attack");
+        animator.SetTrigger("Hurt");
+        yield return new WaitForSeconds(0.5f);
+    }
+
     public void ShieldBreak() //턴이 끝날 때 쉴드를 없애준다.
     {
         playerStatus_Current.Shield = 0;
@@ -93,10 +104,12 @@ public class PlayerController : MonoBehaviour
     public void GetShield(int _shield) //쉴드를 추가해준다.
     {
         playerStatus_Current.Shield += _shield;
+        //SoundManager.PlaySFX("Defence");
     }
 
     public void GetHeal(int _Heal) //회복을 하게 되는 상황
     {
+        StartCoroutine(GetHeal());
         playerStatus_Current.HP += _Heal;
 
         if (playerStatus_Current.HP > playerStatus.HP) //회복량이 처음 수치를 넘어가게 될 경우, 원래 status의 체력 상태로 보여준다.
@@ -106,5 +119,12 @@ public class PlayerController : MonoBehaviour
 
             print("회복 완료");
         }
+    }
+
+    IEnumerator GetHeal()
+    {
+        animator.SetTrigger("Heal");
+        //SoundManager.PlaySFX("Heal");
+        yield return new WaitForSeconds(0.5f);
     }
 }

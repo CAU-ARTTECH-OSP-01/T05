@@ -7,7 +7,7 @@ public class Popup_DeleteCard : MonoBehaviour
     //카드 제거 팝업에 컴포넌트로 넣어주고, 카드 제거 버튼의 On Click 이벤트로 OpenDeck 함수를 실행하도록 설정해준다.
     public GameObject originCard; //제거 카드 Prefab
     public GameObject content; //카드 제거 팝업의 content 아래에 카드들을 생성해준다.
-    public List<CardStats> cardList; //Database의 카드 리스트를 변환하여 넣어주기 위한 리스트
+    public List<__CardStats> cardList; //Database의 카드 리스트를 변환하여 넣어주기 위한 리스트
     public List<GameObject> cards; //Content 오브젝트 아래에 있는 카드 자체들을 리스트로 선언
 
     public GameObject popup_Delete; //카드 제거 팝업을 열고 닫기 위한 용도
@@ -42,7 +42,7 @@ public class Popup_DeleteCard : MonoBehaviour
         Init();
 
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
-        data = DataReader_TSV.ReadDataByTSV("Data/CardList"); //DataReader_TSV 스크립트를 통해 나눠진 데이터를 가져온다.
+        data = DataReader_CSV.ReadDataByCSV("CardList"); //DataReader_TSV 스크립트를 통해 나눠진 데이터를 가져온다.
 
         DataBase.Instance.cardInventory.Sort();
 
@@ -50,10 +50,10 @@ public class Popup_DeleteCard : MonoBehaviour
 
         for (int i = 0; i < _list.Count; i++) //덱 안의 카드를 생성해주기 위해 덱의 갯수만큼 반복해준다.
         {
-            cardList.Add(DeckManager.Instance.SetCardInfo(data[_list[i]]));
+            cardList.Add(DeckManager.Instance.__SetCardInfo(data[_list[i]]));
 
             GameObject _obj = Instantiate(originCard, content.transform); //카드 오브젝트를 생성해준다.
-            _obj.GetComponent<CardInfo>().SetCardInfo(cardList[i]); //각 카드에 맞는 정보를 넣어준다.
+            _obj.GetComponent<Popup_CardInfo>().SetCardInfo(cardList[i]); //각 카드에 맞는 정보를 넣어준다.
 
             cards.Add(_obj); //Hierarchy 창의 어디에 위치하는지 알아보기 위해 cards 리스트에 _obj를 넣어준다.
         }

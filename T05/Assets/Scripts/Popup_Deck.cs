@@ -29,7 +29,7 @@ public class Popup_Deck : MonoBehaviour
         Init();
 
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
-        data = DataReader_TSV.ReadDataByTSV("Data/CardList"); //DataReader_TSV 스크립트를 통해 나눠진 데이터를 가져온다.
+        data = DataReader_CSV.ReadDataByCSV("CardList"); //DataReader_TSV 스크립트를 통해 나눠진 데이터를 가져온다.
 
         List<CardStats> _list = DeckManager.Instance.deckCardStats; //Singleton으로 만들었던 DeckManager에 쉽게 접근할 수 있다.
                                                                     //_list를 하나 만들고 deckCardStats를 넣어 덱 카드의 Stats 리스트를 얻어온다.

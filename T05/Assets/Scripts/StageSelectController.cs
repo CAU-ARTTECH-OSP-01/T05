@@ -17,6 +17,6 @@ public class StageSelectController : MonoBehaviour
 
     public void StageSpawner()
     {
-        selectBG.GetComponent<SpriteRenderer>().sprite = DataBase.Instance.stageSelectSceneList[stage];
+        selectBG.GetComponent<SpriteRenderer>().sprite = DataBase.Instance.stageSelectSceneList[stage]; //스테이지 번호에 맞는 배경을 설정해준다.
     }
 }

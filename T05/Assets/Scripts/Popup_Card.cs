@@ -11,6 +11,7 @@ public class Popup_Card : MonoBehaviour
 
     public void PointerEnter() //마우스를 올렸을 때 살짝 확대하도록 한다.
     {
+        //SoundManager.PlaySFX("TouchCard");
         transform.localScale = Vector3.one * expandRatio; //카드 확대, new Vector3(expandRatio, expandRatio, expandRatio)와 같다.
     }
 
@@ -23,7 +24,9 @@ public class Popup_Card : MonoBehaviour
     {
         if(!isClicked)
         {
-            DataBase.Instance.cardInventory.Add(GetComponent<CardInfo>().stats.index);
+            //SoundManager.PlaySFX("GetCard");
+            DataBase.Instance.cardInventory.Add(GetComponent<Popup_CardInfo>().__stats.__index);
+            GameManager.Instance.player_Victory.SetActive(true);
             isClicked = true;
         }
     }
@@ -32,9 +35,11 @@ public class Popup_Card : MonoBehaviour
     {
         if(!isClicked)
         {
-            int _cardIndex = GetComponent<CardInfo>().stats.index;
+            //SoundManager.PlaySFX("GetCard");
+            int _cardIndex = GetComponent<Popup_CardInfo>().__stats.__index;
             int _cardNum = DataBase.Instance.cardInventory.BinarySearch(_cardIndex);
             DataBase.Instance.cardInventory.RemoveAt(_cardNum);
+            GameManager.Instance.player_Victory.SetActive(true);
             isClicked = true;
         }
     }
